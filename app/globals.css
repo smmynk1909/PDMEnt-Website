@@ -836,7 +836,7 @@ section.block {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 14px;
 }
-.fam {
+.families .fam {
   border-radius: 28px;
   padding: 28px 22px 24px;
   min-height: 190px;
@@ -846,24 +846,24 @@ section.block {
   gap: 8px;
   transition: transform 400ms var(--rm-ease-out);
 }
-.fam:hover {
+.families .fam:hover {
   transform: scale(1.03);
 }
-.fam .num {
+.families .fam .num {
   font-family: var(--rm-font-product);
   color: var(--rm-ink-soft);
   font-size: 13px;
 }
-.fam strong {
+.families .fam strong {
   font-family: var(--rm-font-display);
   font-size: 28px;
   letter-spacing: -0.02em;
   font-weight: 500;
 }
-.fam span.one {
+.families .fam span.one {
   color: var(--rm-ink-soft);
 }
-.fam .shop {
+.families .fam .shop {
   color: var(--rm-forest);
   font-weight: 500;
   font-size: 14px;
