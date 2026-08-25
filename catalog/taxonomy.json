@@ -1,0 +1,102 @@
+{
+  "brand": "Roots and Mills",
+  "legalEntity": "PDM Enterprises",
+  "founders": ["Pratik", "Daxesh", "Mayank"],
+  "tagline": ["Dakshya", "Prateet", "Soma"],
+  "taglineGloss": ["Mastery", "Trust", "Calm"],
+  "families": [
+    {
+      "id": "masalas",
+      "path": "/masalas",
+      "name": "Masalas",
+      "oneLiner": "The tin, considered.",
+      "localNav": ["Explore", "Indian", "World", "Blends", "Heat"],
+      "lineupSegments": ["All", "Everyday", "Regional", "World", "Heat"],
+      "chapters": [
+        { "id": "glimpse", "label": "Glimpse" },
+        { "id": "lineup", "label": "Lineup" },
+        { "id": "indian", "label": "Indian" },
+        { "id": "foreign", "label": "World" },
+        { "id": "blends", "label": "Blends" },
+        { "id": "heat", "label": "Heat" },
+        { "id": "reviews", "label": "Reviews" },
+        { "id": "pairings", "label": "Pairings" }
+      ],
+      "facets": ["originArea", "form", "heat", "size"]
+    },
+    {
+      "id": "flour",
+      "path": "/flour",
+      "name": "Flour",
+      "oneLiner": "Grain, milled slow.",
+      "localNav": ["Explore", "Millets", "Pulses", "Wheat", "Rice"],
+      "lineupSegments": ["All", "Millets", "Pulses", "Wheat", "Rice"],
+      "chapters": [
+        { "id": "glimpse", "label": "Glimpse" },
+        { "id": "lineup", "label": "Lineup" },
+        { "id": "millets", "label": "Millets" },
+        { "id": "pulses", "label": "Pulses" },
+        { "id": "wheat", "label": "Wheat" },
+        { "id": "rice", "label": "Rice" },
+        { "id": "reviews", "label": "Reviews" },
+        { "id": "pairings", "label": "Pairings" }
+      ],
+      "facets": ["originArea", "grain", "size"]
+    },
+    {
+      "id": "coffee",
+      "path": "/coffee",
+      "name": "Coffee",
+      "oneLiner": "Origin in the cup.",
+      "localNav": ["Explore", "India", "South-East Asia", "Process", "Roast"],
+      "lineupSegments": ["All", "India", "South-East Asia", "Filter", "Espresso"],
+      "chapters": [
+        { "id": "glimpse", "label": "Glimpse" },
+        { "id": "lineup", "label": "Lineup" },
+        { "id": "india", "label": "India" },
+        { "id": "sea", "label": "South-East Asia" },
+        { "id": "process", "label": "Process" },
+        { "id": "roast", "label": "Roast" },
+        { "id": "reviews", "label": "Reviews" },
+        { "id": "pairings", "label": "Pairings" }
+      ],
+      "facets": ["originArea", "process", "roast", "size"]
+    },
+    {
+      "id": "tea",
+      "path": "/tea",
+      "name": "Tea",
+      "oneLiner": "Leaf, unhurried.",
+      "localNav": ["Explore", "India", "South-East Asia", "Style"],
+      "lineupSegments": ["All", "India", "South-East Asia", "Black", "Green"],
+      "chapters": [
+        { "id": "glimpse", "label": "Glimpse" },
+        { "id": "lineup", "label": "Lineup" },
+        { "id": "india", "label": "India" },
+        { "id": "sea", "label": "South-East Asia" },
+        { "id": "style", "label": "Style" },
+        { "id": "reviews", "label": "Reviews" },
+        { "id": "pairings", "label": "Pairings" }
+      ],
+      "facets": ["originArea", "style", "size"]
+    },
+    {
+      "id": "oil",
+      "path": "/oil",
+      "name": "Oil",
+      "oneLiner": "Pressed, not performed.",
+      "localNav": ["Explore", "India", "World", "Press"],
+      "lineupSegments": ["All", "Everyday", "Finishing", "World"],
+      "chapters": [
+        { "id": "glimpse", "label": "Glimpse" },
+        { "id": "lineup", "label": "Lineup" },
+        { "id": "india", "label": "India" },
+        { "id": "foreign", "label": "World" },
+        { "id": "press", "label": "Press" },
+        { "id": "reviews", "label": "Reviews" },
+        { "id": "pairings", "label": "Pairings" }
+      ],
+      "facets": ["originArea", "press", "size"]
+    }
+  ]
+}

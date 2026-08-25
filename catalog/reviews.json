@@ -1,0 +1,122 @@
+[
+  {
+    "id": "r-haldi-01",
+    "productHandle": "haldi",
+    "rating": 5,
+    "title": "Colour in the dal, immediately",
+    "body": "Dummy review: the tin looks considered. Bloomed in ghee and the kitchen went quiet. Will restock when lots are live.",
+    "author": "Ananya S.",
+    "city": "Bengaluru",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-HAL-100",
+    "createdAt": "2026-08-12"
+  },
+  {
+    "id": "r-haldi-02",
+    "productHandle": "haldi",
+    "rating": 4,
+    "title": "Fine mill, not dusty",
+    "body": "Does not clump like the supermarket tin. Soma is storage: we just close it.",
+    "author": "Rahul M.",
+    "city": "Pune",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-HAL-100",
+    "createdAt": "2026-08-14"
+  },
+  {
+    "id": "r-mirch-01",
+    "productHandle": "lal-mirch",
+    "rating": 5,
+    "title": "Red first",
+    "body": "The gravy looked finished before it tasted hot. That is mastery.",
+    "author": "Fatima K.",
+    "city": "Hyderabad",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-MIR-100",
+    "createdAt": "2026-08-10"
+  },
+  {
+    "id": "r-kk-01",
+    "productHandle": "kitchen-king",
+    "rating": 5,
+    "title": "Weeknight tin",
+    "body": "One spoon on mixed vegetables. No extra five masalas. Trust.",
+    "author": "Pratik (founder dummy note)",
+    "city": "PDM kitchen",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-KK-100",
+    "createdAt": "2026-08-09"
+  },
+  {
+    "id": "r-khapli-01",
+    "productHandle": "khapli",
+    "rating": 5,
+    "title": "Roti that needs no speech",
+    "body": "Sweeter than our usual atta. We make fewer. Better.",
+    "author": "Meera D.",
+    "city": "Mumbai",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-KHP-1K",
+    "createdAt": "2026-08-11"
+  },
+  {
+    "id": "r-coorg-01",
+    "productHandle": "coorg-arabica",
+    "rating": 4,
+    "title": "Filter, not a stunt",
+    "body": "Jaggery and peel. Dummy lot still tasted like a place.",
+    "author": "Arjun P.",
+    "city": "Chennai",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-COF-COG-250",
+    "createdAt": "2026-08-13"
+  },
+  {
+    "id": "r-assam-01",
+    "productHandle": "assam-ctc",
+    "rating": 5,
+    "title": "Chai backbone",
+    "body": "Stands up to milk. Morning is quieter when the tea is decided.",
+    "author": "Daxesh (founder dummy note)",
+    "city": "PDM kitchen",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-TEA-ASM-100",
+    "createdAt": "2026-08-08"
+  },
+  {
+    "id": "r-coco-01",
+    "productHandle": "coconut-oil",
+    "rating": 5,
+    "title": "Smells like the south, not perfume",
+    "body": "Vegetables, then lid on. Soma.",
+    "author": "Lakshmi R.",
+    "city": "Kochi",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-OIL-COC-500",
+    "createdAt": "2026-08-15"
+  },
+  {
+    "id": "r-podi-01",
+    "productHandle": "podi-gunpowder",
+    "rating": 5,
+    "title": "Coarse, as it should be",
+    "body": "Gingelly oil, idli, no conversation needed.",
+    "author": "Mayank (founder dummy note)",
+    "city": "PDM kitchen",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-POD-080",
+    "createdAt": "2026-08-07"
+  },
+  {
+    "id": "r-olive-01",
+    "productHandle": "olive-oil",
+    "rating": 4,
+    "title": "Foreign tin that still feels ours",
+    "body": "Peppery. On tomatoes with oregano. World chapter works.",
+    "author": "Nina V.",
+    "city": "Goa",
+    "verifiedDummy": true,
+    "lot": "RM-DUM-OIL-OLV-500",
+    "createdAt": "2026-08-16"
+  }
+]
