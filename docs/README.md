@@ -26,6 +26,7 @@ This folder is the source of truth for designing and building the Roots and Mill
 | Checking design references | [13 — Design References](13-design-references.md) |
 | QA / accessibility / launch | [14 — Accessibility](14-accessibility.md) → [15 — QA](15-qa-acceptance.md) |
 | Building UI components | [16 — Component Inventory](16-component-inventory.md) |
+| Building the actual website (exact contract) | [17 — Implementation Guide](17-implementation-guide.md) |
 
 Living visual spec (open in a browser):
 
@@ -41,6 +42,7 @@ Living visual spec (open in a browser):
 5. **Phase 1 ships dummy products** so the experience can be judged before real inventory, payments, or logistics exist.
 6. **The web app must be instrumented from day one.** Analytics is not a later add-on; events are specified in [10 — Analytics](10-analytics.md).
 7. **Marketplace is a later capability**, not the first architecture. Build a first-party brand store that can later host other sellers.
+8. **Design references are internal only.** Apple, growthtoday.co, Refero, Mobbin, and Recent are research inputs — they must never render on any customer-facing page (no reference links, no "from growthtoday.co" captions, no "Apple analog" labels). See [13 — Design References](13-design-references.md). The `/docs-site` living spec is an internal artifact and is allowed to show them; the built site is not.
 
 ## Design research used
 

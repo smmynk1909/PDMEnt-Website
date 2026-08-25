@@ -2,6 +2,8 @@
 
 Requested sources, how they were used, and queries to re-run when MCP is connected.
 
+> **Internal only — never ship references to customers.** Apple, growthtoday.co, Refero, Mobbin, Recent, Diaspora Co., and Burlap & Barrel are *research inputs* for the team. They must **never** appear on any customer-facing page — no reference links, no "from growthtoday.co" captions, no "Apple maps Mac / iPhone" analogies, no "Apple analog" labels. The living-spec pages in `/docs-site` intentionally expose this commentary because they are an **internal design artifact**, not the storefront. The built website (see [17 — Implementation Guide](17-implementation-guide.md)) strips all of it.
+
 ## 1. Refero.design
 
 Site: [https://refero.design/](https://refero.design/)  

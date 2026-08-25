@@ -15,8 +15,11 @@ Non-negotiables:
 - Every product has Dakshya, Prateet, Soma
 - Dummy catalog in `catalog/*.json` until CMS exists
 - `vendorId` remains on products for the future marketplace
+- **Design references are internal only.** Apple, growthtoday.co, Refero, Mobbin, and Recent must never appear on a customer-facing page — no reference links, no "from growthtoday.co" captions, no "Apple maps / Apple analog" labels. The `/docs-site` living spec may show them (internal artifact); the built site must not.
 
 Do not start from a generic grocery Shopify theme.
+
+To build the real website, follow `docs/17-implementation-guide.md` — it is the exact build contract derived from the mockup and this pack.
 
 ## Cursor Cloud specific instructions
 
