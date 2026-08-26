@@ -23,8 +23,18 @@ To build the real website, follow `docs/17-implementation-guide.md` — it is th
 
 ## Cursor Cloud specific instructions
 
-This repo currently holds only design docs, a dummy catalog, and a static "living spec" site — there is **no** package manager, build step, framework, or automated test suite yet (the Next.js app in `docs/08-technical-architecture.md` is a future target, not present). Nothing needs to be installed; `python3` (used to serve the site) is already available.
+The storefront is a **Next.js (App Router) + TypeScript** app rooted at the repo top level (`app/`, `components/`, `lib/`, `types/`). Dependencies install with `npm install` (Node 22, npm 10; committed `package-lock.json`). The update script runs `npm install` automatically, so it is already done at session start.
 
-- Run the app (dev): serve the repo from its **root**, e.g. `python3 -m http.server 8000`, then open `http://localhost:8000/docs-site/index.html`. Serve from the repo root (not from `docs-site/`) because the pages reference `../design/tokens.css` and cross-link to `catalog/` — serving `docs-site/` directly breaks those relative paths.
-- Pages: `docs-site/index.html` (home / families) and `docs-site/category.html` (Masalas category with scroll-driven glimpse → filters + right rail). All product data and JS are inline in the HTML; the `catalog/*.json` files are reference data, not fetched at runtime. Google Fonts load from the network.
-- "Lint/test" equivalent: validate the catalog JSON, e.g. `for f in catalog/*.json; do python3 -m json.tool "$f" >/dev/null && echo "OK $f"; done`.
+Standard commands (see `package.json` `scripts`):
+
+- Dev server: `npm run dev` (Next dev on `http://localhost:3000`). Boots with the dummy catalog, zero manual setup.
+- Build: `npm run build` (fully static — every family and product is prerendered via `generateStaticParams`).
+- Lint: `npm run lint`. Typecheck: `npm run typecheck` (`tsc --noEmit`).
+
+Non-obvious caveats:
+
+- The catalog JSON in `catalog/*.json` is imported at build time via typed loaders in `lib/catalog.ts` (through `resolveJsonModule`), not fetched at runtime. Editing catalog data requires a dev-server reload/rebuild to take effect.
+- `lib/copy.ts` `sanitizeCopy()` strips banned design references (Apple, growthtoday.co, Refero, Mobbin, Recent, Diaspora, Burlap & Barrel) from product copy at load time — this enforces the customer-facing "no design references" rule. Keep it in the data path; do not bypass it in components.
+- `design/tokens.css` is imported globally in `app/layout.tsx` and its `--rm-font-*` variables are overridden by `next/font` in `app/globals.css` — fonts are self-hosted, not loaded from Google at runtime.
+- Cart state is Zustand + `localStorage` (`lib/cart.ts`); a `CartHydrator` guards SSR hydration. Checkout is a mock (`app/checkout/`) that generates a dummy order id — there is no payment/auth/DB integration.
+- The `/docs-site/*.html` living-spec mockup is an internal artifact and intentionally still contains design references; the built Next.js app must not.
