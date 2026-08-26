@@ -1,0 +1,44 @@
+:root {
+  /* Roots and Mills — extracted from growthtoday.co and extended with turmeric */
+  --rm-cream: #f4f1e8;
+  --rm-cream-deep: #e0dfda;
+  --rm-white: #fffcf6;
+  --rm-ink: #23201a;
+  --rm-ink-soft: #5c584f;
+  --rm-lime: #54ff99;
+  --rm-lime-soft: #bbffd6;
+  --rm-lime-mid: #76ffad;
+  --rm-forest: #0d4a25;
+  --rm-olive: #647c3a;
+  --rm-turmeric: #f0c43c;
+  --rm-mustard: #d4a017;
+  --rm-bag: #1c1c1c;
+  --rm-error: #9b2c2c;
+
+  --rm-font-display: "Outfit", system-ui, sans-serif;
+  --rm-font-ui: "IBM Plex Sans", system-ui, sans-serif;
+  --rm-font-product: "Inconsolata", ui-monospace, monospace;
+
+  --rm-nav-global: 48px;
+  --rm-nav-local: 52px;
+  --rm-nav-filter: 56px;
+  --rm-radius-s: 12px;
+  --rm-radius-m: 18px;
+  --rm-radius-l: 28px;
+
+  --rm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --rm-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --rm-fast: 180ms;
+  --rm-med: 320ms;
+  --rm-slow: 600ms;
+
+  --rm-sticky-stack: 100px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rm-fast: 0ms;
+    --rm-med: 0ms;
+    --rm-slow: 0ms;
+  }
+}

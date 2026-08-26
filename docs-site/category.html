@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Masalas — Roots and Mills (prototype)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inconsolata:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../design/tokens.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--rm-cream); color: var(--rm-ink);
+      font-family: var(--rm-font-ui); font-size: 17px; line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, select { font: inherit; }
+    .gnav, .lnav, .fbar {
+      position: sticky; z-index: 40; display: flex; align-items: center;
+      backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(244,241,232,0.9);
+    }
+    .gnav {
+      top: 0; height: 48px; justify-content: space-between; padding: 0 22px;
+      border-bottom: 1px solid var(--rm-cream-deep); z-index: 50;
+    }
+    .wordmark { font-family: var(--rm-font-display); font-weight: 500; font-size: 15px; }
+    .gnav nav { display: flex; gap: 22px; font-size: 13px; }
+    .gnav nav a.active { box-shadow: inset 0 -2px 0 var(--rm-lime); }
+    .lnav {
+      top: 48px; height: 52px; padding: 0 22px; justify-content: space-between;
+      border-bottom: 1px solid transparent; z-index: 45;
+    }
+    body.catalog .lnav { border-bottom-color: var(--rm-cream-deep); }
+    .lnav .fam { font-family: var(--rm-font-display); font-weight: 500; }
+    .lnav .links { display: flex; gap: 18px; font-size: 13px; color: var(--rm-ink-soft); }
+    .buy {
+      height: 32px; padding: 0 14px; border-radius: 980px; border: 0;
+      background: var(--rm-forest); color: var(--rm-cream); font-size: 13px; font-weight: 500; cursor: pointer;
+    }
+    .fbar {
+      top: 100px; height: 56px; padding: 0 22px; gap: 10px; justify-content: space-between;
+      border-bottom: 1px solid var(--rm-cream-deep);
+      transform: translateY(-120%); opacity: 0; pointer-events: none;
+      transition: transform var(--rm-med) var(--rm-ease), opacity var(--rm-fast);
+      z-index: 40;
+    }
+    body.catalog .fbar { transform: none; opacity: 1; pointer-events: auto; }
+    .fbar .count { font-family: var(--rm-font-product); font-size: 13px; min-width: 110px; }
+    .facets { display: flex; gap: 8px; flex-wrap: wrap; }
+    .facets button, .fbar select {
+      height: 32px; padding: 0 12px; border-radius: 980px; border: 1px solid var(--rm-cream-deep);
+      background: var(--rm-white); cursor: pointer; font-size: 13px;
+    }
+    .facets button.on { border-color: var(--rm-forest); background: var(--rm-lime-soft); }
+    .glimpse {
+      min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 48px 16px;
+    }
+    .glimpse h1 {
+      font-family: var(--rm-font-display); font-size: clamp(56px, 12vw, 96px);
+      letter-spacing: -0.04em; font-weight: 500; line-height: 0.9;
+    }
+    .triad { font-family: var(--rm-font-product); letter-spacing: 0.16em; text-transform: uppercase; color: var(--rm-ink-soft); margin: 16px 0 10px; font-size: 13px; }
+    .tins { display: flex; gap: 18px; justify-content: center; margin-top: 36px; }
+    .tin { width: 90px; height: 118px; border-radius: 14px 14px 8px 8px; box-shadow: 0 20px 40px rgba(35,32,26,0.14); }
+    #lineup { padding: 48px 22px 80px; max-width: 1280px; margin: 0 auto; }
+    #lineup h2 { font-family: var(--rm-font-display); font-size: 40px; letter-spacing: -0.03em; font-weight: 500; }
+    .seg { display: flex; gap: 8px; margin: 18px 0 28px; flex-wrap: wrap; }
+    .seg button {
+      border: 0; background: transparent; color: var(--rm-ink-soft); cursor: pointer; font-size: 14px; padding: 6px 10px;
+    }
+    .seg button.on { color: var(--rm-ink); box-shadow: inset 0 -2px 0 var(--rm-lime); }
+    .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .card { background: var(--rm-white); border-radius: 28px; overflow: hidden; }
+    .art { height: 200px; display: grid; place-items: center; }
+    .card h3 { font-family: var(--rm-font-display); font-size: 22px; font-weight: 500; padding: 16px 18px 0; }
+    .card p { padding: 6px 18px; }
+    .card .from { padding: 0 18px 8px; color: var(--rm-mustard); font-size: 14px; font-weight: 500; }
+    .card .cta { padding: 0 18px 20px; display: flex; gap: 14px; font-size: 14px; }
+    .card .cta span { color: var(--rm-forest); font-weight: 500; cursor: pointer; }
+    .catalog-space { padding: 24px 22px 120px; max-width: 1180px; }
+    .chapter { margin-bottom: 56px; }
+    .chapter h2 { font-family: var(--rm-font-display); font-size: 28px; font-weight: 500; margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+    .gcard { background: var(--rm-white); border-radius: 18px; overflow: hidden; }
+    .gcard .art { height: 140px; }
+    .gcard h3 { font-size: 18px; padding: 12px 14px 0; font-family: var(--rm-font-display); font-weight: 500; }
+    .gcard .mono { font-family: var(--rm-font-product); font-size: 12px; color: var(--rm-ink-soft); padding: 4px 14px 14px; }
+    .rail {
+      position: fixed; right: 18px; top: 50%; transform: translateY(-50%) translateX(12px);
+      opacity: 0; pointer-events: none; transition: opacity var(--rm-med), transform var(--rm-med) var(--rm-ease);
+      z-index: 30; display: none; flex-direction: column; gap: 10px;
+    }
+    body.catalog .rail { opacity: 1; pointer-events: auto; transform: translateY(-50%); }
+    @media (min-width: 1080px) { .rail { display: flex; } }
+    .rail a {
+      display: flex; align-items: center; gap: 8px; font-family: var(--rm-font-product); font-size: 11px; color: var(--rm-ink-soft);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rm-cream-deep); flex-shrink: 0; }
+    .rail a.cur { color: var(--rm-ink); }
+    .rail a.cur .dot { background: var(--rm-lime); box-shadow: 0 0 0 3px var(--rm-lime-soft); }
+    .banner {
+      font-family: var(--rm-font-product); font-size: 12px; text-align: center;
+      padding: 8px; background: var(--rm-lime-soft); color: var(--rm-forest);
+    }
+    .empty { font-family: var(--rm-font-product); padding: 40px 0; color: var(--rm-ink-soft); }
+    @media (max-width: 800px) {
+      .gnav nav, .lnav .links { display: none; }
+      .tins { transform: scale(0.9); }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">Viewing dummy mill lots. Filters and the right scroller appear after you pass the lineup.</div>
+  <header class="gnav">
+    <a class="wordmark" href="index.html">Roots and Mills</a>
+    <nav>
+      <a class="active" href="category.html">Masalas</a>
+      <a href="index.html#families">Flour</a>
+      <a href="index.html#families">Coffee</a>
+      <a href="index.html#families">Tea</a>
+      <a href="index.html#families">Oil</a>
+    </nav>
+    <span style="font-size:13px">Bag 0</span>
+  </header>
+  <nav class="lnav">
+    <span class="fam">Masalas</span>
+    <div class="links">
+      <a href="#glimpse">Explore</a>
+      <a href="#indian">Indian</a>
+      <a href="#foreign">World</a>
+      <a href="#blends">Blends</a>
+      <a href="#heat">Heat</a>
+    </div>
+    <button class="buy" type="button" id="buy">Buy</button>
+  </nav>
+  <div class="fbar" id="fbar">
+    <span class="count" id="count">12 masalas</span>
+    <div class="facets">
+      <button type="button" data-facet="origin" data-value="india">Indian</button>
+      <button type="button" data-facet="origin" data-value="world">World</button>
+      <button type="button" data-facet="form" data-value="blend">Blends</button>
+      <button type="button" data-facet="form" data-value="ground">Ground</button>
+      <button type="button" data-facet="heat" data-value="hot">Heat</button>
+    </div>
+    <select id="sort" aria-label="Sort">
+      <option value="featured">Featured</option>
+      <option value="price">Price</option>
+      <option value="name">Name A–Z</option>
+    </select>
+  </div>
+  <aside class="rail" id="rail" aria-label="Sections"></aside>
+
+  <section class="glimpse" id="glimpse" data-chapter="glimpse">
+    <div>
+      <h1>Masalas</h1>
+      <p class="triad">Dakshya · Prateet · Soma</p>
+      <p>Indian kitchens, and the spices that travelled to them.</p>
+      <div class="tins">
+        <div class="tin" style="background:#f0c43c"></div>
+        <div class="tin" style="background:#c23b22"></div>
+        <div class="tin" style="background:#647c3a"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lineup" data-chapter="lineup">
+    <h2>Explore the lineup.</h2>
+    <p class="triad" style="letter-spacing:0.08em">Dummy mill lots — for view, not yet the warehouse.</p>
+    <div class="seg" id="seg">
+      <button class="on" data-seg="all">All</button>
+      <button data-seg="everyday">Everyday</button>
+      <button data-seg="regional">Regional</button>
+      <button data-seg="world">World</button>
+      <button data-seg="heat">Heat</button>
+    </div>
+    <div class="row" id="lineupRow"></div>
+  </section>
+
+  <div class="catalog-space">
+    <section class="chapter" id="indian" data-chapter="indian"><h2>Indian</h2><div class="grid" data-grid="indian"></div></section>
+    <section class="chapter" id="foreign" data-chapter="foreign"><h2>World</h2><div class="grid" data-grid="foreign"></div></section>
+    <section class="chapter" id="blends" data-chapter="blends"><h2>Blends</h2><div class="grid" data-grid="blends"></div></section>
+    <section class="chapter" id="heat" data-chapter="heat"><h2>Heat</h2><div class="grid" data-grid="heat"></div></section>
+  </div>
+
+  <script>
+    const products = [
+      { name: "Haldi", one: "Colour first. Then the kitchen calms.", price: 149, bg: "#f8e7a0", tin: "#f0c43c", origin: "india", form: "ground", heat: 0, tags: ["everyday"], notes: "earth / orange peel / warm bitter", score: 100 },
+      { name: "Lal Mirch", one: "Heat you can aim.", price: 199, bg: "#f3d0c8", tin: "#c23b22", origin: "india", form: "ground", heat: 3, tags: ["everyday", "heat"], notes: "dried red fruit / warm dust", score: 95 },
+      { name: "Kitchen King", one: "The workhorse. On purpose.", price: 229, bg: "#e4efd4", tin: "#647c3a", origin: "india", form: "blend", heat: 2, tags: ["everyday", "regional"], notes: "coriander / cumin / round", score: 92 },
+      { name: "Sambhar", one: "South in the ladle.", price: 249, bg: "#f0d9c8", tin: "#c45c26", origin: "india", form: "blend", heat: 2, tags: ["regional"], notes: "toasted chana / chilli", score: 80 },
+      { name: "Amchur", one: "Sour, without the fruit bowl.", price: 219, bg: "#efe8b8", tin: "#c4b44a", origin: "india", form: "ground", heat: 0, tags: ["everyday"], notes: "green mango / tart", score: 70 },
+      { name: "Chana", one: "Chickpeas, already thinking.", price: 239, bg: "#ead9b8", tin: "#b8893a", origin: "india", form: "blend", heat: 2, tags: ["regional"], notes: "cumin / mango sour", score: 74 },
+      { name: "Rajma", one: "Sunday, without the wait.", price: 239, bg: "#e8cfc8", tin: "#7a2e1f", origin: "india", form: "blend", heat: 2, tags: ["regional"], notes: "chilli / round", score: 73 },
+      { name: "Chole", one: "Street memory. Home tin.", price: 249, bg: "#e4d4c8", tin: "#5c3317", origin: "india", form: "blend", heat: 3, tags: ["regional", "heat"], notes: "pomegranate sour / cumin", score: 78 },
+      { name: "Pav Bhaji", one: "The stall, indoors.", price: 229, bg: "#f5d8c4", tin: "#e07a3d", origin: "india", form: "blend", heat: 3, tags: ["regional", "heat"], notes: "tang / chilli", score: 77 },
+      { name: "Podi", one: "Idli’s other half.", price: 259, bg: "#e8d8cc", tin: "#2a1a12", origin: "india", form: "blend", heat: 4, tags: ["regional", "heat"], notes: "sesame / chilli / roasted dal", score: 81 },
+      { name: "Chilli Flakes", one: "Texture, then fire.", price: 179, bg: "#f3d0c8", tin: "#a32018", origin: "world", form: "whole", heat: 4, tags: ["world", "heat"], notes: "seed crunch / bright heat", score: 66 },
+      { name: "Oregano", one: "The foreign tin, kept honest.", price: 199, bg: "#dce8d4", tin: "#3d5c34", origin: "world", form: "whole", heat: 0, tags: ["world", "everyday"], notes: "camphor-green / pine", score: 60 }
+    ];
+
+    const filters = { origin: new Set(), form: new Set(), heat: false };
+    let sort = "featured";
+    let seg = "all";
+
+    const lineupRow = document.getElementById("lineupRow");
+    const countEl = document.getElementById("count");
+
+    function inr(n) { return "From ₹" + n; }
+
+    function lineupCard(p) {
+      return `<article class="card">
+        <div class="art" style="background:${p.bg}"><div class="tin" style="width:72px;height:96px;border-radius:12px;background:${p.tin}"></div></div>
+        <h3>${p.name}</h3>
+        <p>${p.one}</p>
+        <p class="from">${inr(p.price)}</p>
+        <div class="cta"><span>Learn more</span><span>Buy</span></div>
+      </article>`;
+    }
+
+    function gridCard(p) {
+      return `<article class="gcard">
+        <div class="art" style="background:${p.bg}"><div class="tin" style="width:52px;height:70px;border-radius:10px;background:${p.tin}"></div></div>
+        <h3>${p.name}</h3>
+        <p class="mono">${p.notes}<br/>${inr(p.price)}</p>
+      </article>`;
+    }
+
+    function passFilters(p) {
+      if (filters.origin.size && !filters.origin.has(p.origin)) return false;
+      if (filters.form.size && !filters.form.has(p.form)) return false;
+      if (filters.heat && p.heat < 3) return false;
+      return true;
+    }
+
+    function sorted(list) {
+      const arr = [...list];
+      if (sort === "price") arr.sort((a, b) => a.price - b.price);
+      else if (sort === "name") arr.sort((a, b) => a.name.localeCompare(b.name));
+      else arr.sort((a, b) => b.score - a.score);
+      return arr;
+    }
+
+    function renderLineup() {
+      let list = products.filter((p) => {
+        if (seg === "all") return p.score >= 78 || p.tags.includes("everyday");
+        if (seg === "everyday") return p.tags.includes("everyday");
+        if (seg === "regional") return p.tags.includes("regional");
+        if (seg === "world") return p.tags.includes("world");
+        if (seg === "heat") return p.tags.includes("heat");
+        return true;
+      }).slice(0, 6);
+      lineupRow.innerHTML = list.map(lineupCard).join("");
+    }
+
+    function renderGrids() {
+      const list = sorted(products.filter(passFilters));
+      countEl.textContent = list.length + " masalas";
+      const buckets = {
+        indian: list.filter((p) => p.origin === "india"),
+        foreign: list.filter((p) => p.origin === "world"),
+        blends: list.filter((p) => p.form === "blend"),
+        heat: list.filter((p) => p.heat >= 3)
+      };
+      for (const [key, items] of Object.entries(buckets)) {
+        const el = document.querySelector(`[data-grid="${key}"]`);
+        const chapter = el.closest(".chapter");
+        if (!items.length) {
+          chapter.style.display = "none";
+          el.innerHTML = "";
+        } else {
+          chapter.style.display = "";
+          el.innerHTML = items.map(gridCard).join("");
+        }
+      }
+      document.getElementById("rail").querySelectorAll("a[href^='#']").forEach((a) => {
+        const id = a.getAttribute("href").slice(1);
+        const sec = document.getElementById(id);
+        if (sec && sec.classList.contains("chapter")) {
+          a.style.display = sec.style.display === "none" ? "none" : "";
+        }
+      });
+    }
+
+    document.getElementById("seg").addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      seg = b.dataset.seg;
+      document.querySelectorAll("#seg button").forEach((x) => x.classList.toggle("on", x === b));
+      renderLineup();
+    });
+
+    document.querySelectorAll(".facets button").forEach((b) => {
+      b.addEventListener("click", () => {
+        const facet = b.dataset.facet;
+        const value = b.dataset.value;
+        if (facet === "heat") {
+          filters.heat = !filters.heat;
+          b.classList.toggle("on", filters.heat);
+        } else {
+          const set = filters[facet];
+          if (set.has(value)) set.delete(value); else set.add(value);
+          b.classList.toggle("on", set.has(value));
+        }
+        renderGrids();
+      });
+    });
+
+    document.getElementById("sort").addEventListener("change", (e) => {
+      sort = e.target.value;
+      renderGrids();
+    });
+
+    const chapters = [
+      ["glimpse", "Glimpse"],
+      ["lineup", "Lineup"],
+      ["indian", "Indian"],
+      ["foreign", "World"],
+      ["blends", "Blends"],
+      ["heat", "Heat"]
+    ];
+    const rail = document.getElementById("rail");
+    rail.innerHTML = chapters.map(([id, label]) => `<a href="#${id}" data-id="${id}"><i class="dot"></i>${label}</a>`).join("");
+
+    const lineup = document.getElementById("lineup");
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target.id === "lineup") {
+          const leavingDown = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          const backToGlimpse = entry.isIntersecting && window.scrollY < lineup.offsetTop - 80;
+          if (leavingDown) document.body.classList.add("catalog");
+          if (backToGlimpse && window.scrollY < 200) document.body.classList.remove("catalog");
+        }
+      }
+    }, { threshold: 0.08, rootMargin: "-120px 0px 0px 0px" });
+    io.observe(lineup);
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > lineup.offsetTop + lineup.offsetHeight * 0.35) document.body.classList.add("catalog");
+      if (window.scrollY < lineup.offsetTop - 40) document.body.classList.remove("catalog");
+      let current = "glimpse";
+      for (const [id] of chapters) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top < 180) current = id;
+      }
+      rail.querySelectorAll("a").forEach((a) => a.classList.toggle("cur", a.dataset.id === current));
+    }, { passive: true });
+
+    document.getElementById("buy").addEventListener("click", () => {
+      document.getElementById("lineup").scrollIntoView();
+      document.body.classList.add("catalog");
+    });
+
+    renderLineup();
+    renderGrids();
+  </script>
+</body>
+</html>

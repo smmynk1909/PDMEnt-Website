@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roots and Mills — Living design spec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inconsolata:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../design/tokens.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 56px; }
+    body {
+      background: var(--rm-cream);
+      color: var(--rm-ink);
+      font-family: var(--rm-font-ui);
+      font-size: 17px;
+      line-height: 1.47;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .gnav {
+      position: sticky; top: 0; z-index: 50; height: 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(244,241,232,0.86);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--rm-cream-deep);
+    }
+    .wordmark { font-family: var(--rm-font-display); font-weight: 500; font-size: 15px; letter-spacing: 0.02em; }
+    .gnav nav { display: flex; gap: 28px; font-size: 13px; }
+    .gnav nav a:hover { color: var(--rm-forest); }
+    .gnav .icons { display: flex; gap: 18px; font-size: 13px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .hero {
+      min-height: 88vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center; gap: 18px;
+    }
+    .hero h1 {
+      font-family: var(--rm-font-display); font-weight: 500;
+      font-size: clamp(42px, 8vw, 88px); letter-spacing: -0.03em; line-height: 0.95;
+    }
+    .triad {
+      font-family: var(--rm-font-product); font-size: 16px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--rm-ink-soft);
+    }
+    .gloss { color: var(--rm-ink-soft); font-size: 17px; }
+    .pill {
+      display: inline-flex; align-items: center; height: 44px; padding: 0 22px;
+      border-radius: 980px; background: var(--rm-forest); color: var(--rm-cream);
+      font-size: 15px; font-weight: 500;
+    }
+    .pill.ghost { background: transparent; color: var(--rm-forest); border: 1.5px solid var(--rm-forest); }
+    .hero-cta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; justify-content: center; }
+    section.block { padding: 96px 0; }
+    h2 {
+      font-family: var(--rm-font-display); font-size: clamp(32px, 4vw, 48px);
+      letter-spacing: -0.03em; font-weight: 500; margin-bottom: 16px;
+    }
+    h3 { font-family: var(--rm-font-display); font-size: 24px; font-weight: 500; margin: 28px 0 10px; }
+    .lede { font-size: 21px; max-width: 640px; }
+    .mono { font-family: var(--rm-font-product); }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 28px; }
+    .swatch { border-radius: 18px; overflow: hidden; border: 1px solid var(--rm-cream-deep); }
+    .swatch .chip { height: 88px; }
+    .swatch figcaption { padding: 10px 12px 14px; font-family: var(--rm-font-product); font-size: 12px; }
+    .families { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 32px; }
+    .fam {
+      background: var(--rm-white); border-radius: 28px; padding: 28px 22px 24px; min-height: 160px;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+    }
+    .fam strong { font-family: var(--rm-font-display); font-size: 28px; letter-spacing: -0.02em; }
+    .fam span { color: var(--rm-ink-soft); }
+    .lineup { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 32px; }
+    .card { background: var(--rm-white); border-radius: 28px; overflow: hidden; }
+    .card .art { height: 220px; display: flex; align-items: flex-end; justify-content: center; padding: 24px; }
+    .tin {
+      width: 88px; height: 110px; border-radius: 12px 12px 8px 8px;
+      box-shadow: 0 18px 30px rgba(35,32,26,0.12);
+    }
+    .card .body { padding: 18px 20px 22px; }
+    .card h4 { font-family: var(--rm-font-display); font-size: 22px; font-weight: 500; }
+    .card .one { margin: 6px 0 12px; }
+    .card .from { font-size: 14px; color: var(--rm-mustard); font-weight: 500; }
+    .card .btns { display: flex; gap: 16px; margin-top: 14px; font-size: 14px; }
+    .card .btns a:last-child { color: var(--rm-forest); font-weight: 500; }
+    .phases { display: grid; gap: 12px; margin-top: 24px; }
+    .phase {
+      display: grid; grid-template-columns: 88px 1fr; gap: 16px; align-items: start;
+      background: var(--rm-white); border-radius: 18px; padding: 18px 20px;
+    }
+    .phase b { font-family: var(--rm-font-product); color: var(--rm-forest); }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: var(--rm-font-product); font-size: 14px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--rm-cream-deep); vertical-align: top; }
+    th { color: var(--rm-ink-soft); font-weight: 400; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .links a {
+      border: 1px solid var(--rm-cream-deep); border-radius: 980px; padding: 8px 14px; font-size: 14px;
+      background: var(--rm-white);
+    }
+    footer.spec {
+      padding: 48px 24px 80px; color: var(--rm-ink-soft); font-size: 14px; text-align: center;
+    }
+    @media (max-width: 800px) {
+      .gnav nav { display: none; }
+      .phase { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="gnav">
+    <a class="wordmark" href="#top">Roots and Mills</a>
+    <nav>
+      <a href="category.html">Masalas</a>
+      <a href="#families">Flour</a>
+      <a href="#families">Coffee</a>
+      <a href="#families">Tea</a>
+      <a href="#families">Oil</a>
+    </nav>
+    <div class="icons"><span>Search</span><span>Bag</span></div>
+  </header>
+
+  <main id="top">
+    <div class="hero wrap">
+      <p class="triad">Dakshya · Prateet · Soma</p>
+      <h1>Roots and Mills</h1>
+      <p class="gloss">Mastery · Trust · Calm — a brand of PDM Enterprises<br />Pratik, Daxesh &amp; Mayank</p>
+      <div class="hero-cta">
+        <a class="pill" href="category.html">Open Masalas prototype</a>
+        <a class="pill ghost" href="../docs/README.md">Read the docs</a>
+      </div>
+    </div>
+
+    <section class="block wrap" id="brief">
+      <h2>What this pack is</h2>
+      <p class="lede">Documentation and a dummy mill catalog so the website can be designed like Apple.com — then take orders, then host a marketplace — without inventing the brand twice.</p>
+      <div class="links">
+        <a href="../docs/00-vision-and-brief.md">Vision</a>
+        <a href="../docs/02-design-system.md">Design system</a>
+        <a href="../docs/04-interaction-and-motion.md">Motion</a>
+        <a href="../docs/05-page-specifications/category.md">Category spec</a>
+        <a href="../docs/11-development-plan.md">Development plan</a>
+        <a href="../docs/13-design-references.md">Refero / Mobbin / Recent</a>
+      </div>
+    </section>
+
+    <section class="block wrap" id="colour">
+      <h2>Colour</h2>
+      <p class="lede">From growthtoday.co production CSS: cream canvas, lime growth, forest trust. Turmeric added for Dakshya and spice.</p>
+      <div class="swatches">
+        <figure class="swatch"><div class="chip" style="background:#f4f1e8"></div><figcaption>cream #F4F1E8<br />Soma / page</figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:#23201a"></div><figcaption>ink #23201A<br />type</figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:#54ff99"></div><figcaption>lime #54FF99<br />selected / focus</figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:#0d4a25"></div><figcaption>forest #0D4A25<br />Prateet / Buy</figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:#f0c43c"></div><figcaption>turmeric #F0C43C<br />Dakshya</figcaption></figure>
+        <figure class="swatch"><div class="chip" style="background:#647c3a"></div><figcaption>olive #647C3A<br />tags</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="block wrap" id="type">
+      <h2>Type</h2>
+      <p>UI chrome: Outfit + IBM Plex Sans (Growth Today). Product information: Inconsolata — the mill ledger / typewriter.</p>
+      <h3 style="font-family:Outfit,sans-serif;font-size:40px;letter-spacing:-0.03em;">Haldi, considered.</h3>
+      <p class="mono" style="font-size:18px;max-width:640px;">
+        DAKSHYA  Fine mill. Colour strength first.<br />
+        PRATEET  Lot RM-DUM-HAL-100. Screened.<br />
+        SOMA     Keep the tin closed. That is all.
+      </p>
+    </section>
+
+    <section class="block wrap" id="families">
+      <h2>Five families</h2>
+      <p>Apple maps Mac / iPhone / Watch. We map Masalas / Flour / Coffee / Tea / Oil — same nav weight, same lineup treatment.</p>
+      <div class="families">
+        <article class="fam" style="background:linear-gradient(180deg,#fff8d6,#fffcf6);"><span class="mono">01</span><strong>Masalas</strong><span>The tin, considered.</span></article>
+        <article class="fam" style="background:linear-gradient(180deg,#efe4d4,#fffcf6);"><span class="mono">02</span><strong>Flour</strong><span>Grain, milled slow.</span></article>
+        <article class="fam" style="background:linear-gradient(180deg,#e8d8cc,#fffcf6);"><span class="mono">03</span><strong>Coffee</strong><span>Origin in the cup.</span></article>
+        <article class="fam" style="background:linear-gradient(180deg,#e4efd8,#fffcf6);"><span class="mono">04</span><strong>Tea</strong><span>Leaf, unhurried.</span></article>
+        <article class="fam" style="background:linear-gradient(180deg,#f3efc2,#fffcf6);"><span class="mono">05</span><strong>Oil</strong><span>Pressed, not performed.</span></article>
+      </div>
+    </section>
+
+    <section class="block wrap" id="lineup">
+      <h2>Explore the lineup.</h2>
+      <p class="mono" style="color:var(--rm-ink-soft)">Dummy mill lots — Apple Mac analog for Masalas.</p>
+      <div class="lineup">
+        <article class="card">
+          <div class="art" style="background:#f8e7a0"><div class="tin" style="background:#f0c43c"></div></div>
+          <div class="body">
+            <h4>Haldi</h4>
+            <p class="one">Colour first. Then the kitchen calms.</p>
+            <p class="from">From ₹149</p>
+            <div class="btns"><a href="category.html">Learn more</a><a href="category.html">Buy</a></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="art" style="background:#f3d0c8"><div class="tin" style="background:#c23b22"></div></div>
+          <div class="body">
+            <h4>Lal Mirch</h4>
+            <p class="one">Heat you can aim.</p>
+            <p class="from">From ₹199</p>
+            <div class="btns"><a href="category.html">Learn more</a><a href="category.html">Buy</a></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="art" style="background:#e4efd4"><div class="tin" style="background:#647c3a"></div></div>
+          <div class="body">
+            <h4>Kitchen King</h4>
+            <p class="one">The workhorse. On purpose.</p>
+            <p class="from">From ₹229</p>
+            <div class="btns"><a href="category.html">Learn more</a><a href="category.html">Buy</a></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="art" style="background:#e8d8cc"><div class="tin" style="background:#2a1a12"></div></div>
+          <div class="body">
+            <h4>Podi</h4>
+            <p class="one">Idli’s other half.</p>
+            <p class="from">From ₹259</p>
+            <div class="btns"><a href="category.html">Learn more</a><a href="category.html">Buy</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block wrap" id="ux">
+      <h2>Category behaviour</h2>
+      <p class="lede">First paint is a glimpse (hero + lineup). Filters and the right scroller appear only after the customer scrolls — like leaving the Apple hero and entering the shop.</p>
+      <table>
+        <thead><tr><th>State</th><th>Chrome</th><th>Apple analog</th></tr></thead>
+        <tbody>
+          <tr><td>Glimpse</td><td>Global + local nav only</td><td>/mac hero + Explore the lineup</td></tr>
+          <tr><td>Catalog</td><td>+ sticky filter/sort + right chapter rail</td><td>Store grid + page dots / chapter spy</td></tr>
+          <tr><td>PDP</td><td>Local nav becomes Dakshya · Prateet · Soma · Buy</td><td>Product chapters + buy rail</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:20px"><a class="pill" href="category.html">Scroll the Masalas prototype</a></p>
+    </section>
+
+    <section class="block wrap" id="plan">
+      <h2>Development phases</h2>
+      <div class="phases">
+        <div class="phase"><b>0</b><div><strong>Foundations</strong><p>Tokens, fonts, nav, footer, JSON catalog loader.</p></div></div>
+        <div class="phase"><b>1</b><div><strong>Category experience</strong><p>Masalas glimpse → lineup → filters + right scroller. Then the other four families.</p></div></div>
+        <div class="phase"><b>2</b><div><strong>PDP, home, bag</strong><p>Triad chapters, typewriter specs, dummy checkout.</p></div></div>
+        <div class="phase"><b>3</b><div><strong>Orders</strong><p>Auth, Razorpay, pincode, PDM as seller of record.</p></div></div>
+        <div class="phase"><b>4</b><div><strong>Studio</strong><p>In-site analytics for the three founders.</p></div></div>
+        <div class="phase"><b>5</b><div><strong>Marketplace</strong><p>Other mills and estates, same calm UI, vendorId already on every SKU.</p></div></div>
+      </div>
+    </section>
+
+    <section class="block wrap" id="refs">
+      <h2>References</h2>
+      <p>Specified in <span class="mono">docs/13-design-references.md</span></p>
+      <div class="links">
+        <a href="https://www.apple.com/mac/">apple.com/mac</a>
+        <a href="https://growthtoday.co">growthtoday.co</a>
+        <a href="https://refero.design/">refero.design</a>
+        <a href="https://mobbin.com/">mobbin.com</a>
+        <a href="https://recent.design/">recent.design</a>
+      </div>
+    </section>
+  </main>
+  <footer class="spec">
+    Roots and Mills · Dakshya, Prateet, Soma · PDM Enterprises<br />
+    Dummy mill lots for website view. Not for sale until live FSSAI and harvest fields exist.
+  </footer>
+</body>
+</html>
